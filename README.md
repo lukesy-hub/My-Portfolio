@@ -1,94 +1,132 @@
-# Muhammad Talha — Portfolio
+<div align="center">
 
-Personal portfolio of Muhammad Talha, Full Stack Developer & AI Automation Engineer (Lahore, PK).
-Multi-page Next.js site: editorial/Swiss typography, liquid-glass UI, light & dark themes, and real
-screenshots of every live project.
+<img src="public/Personal-Pic.jpeg" alt="Muhammad Talha" width="180" />
 
-## Getting started
+# Muhammad Talha
 
-Requires Node.js 20.9+.
+**Full Stack Developer & AI Automation Engineer** · Team Lead at Syncognix · Lahore, Pakistan
 
-```bash
-npm install
-npm run dev        # http://localhost:3000
-```
+I build production web apps, mobile apps and LLM-driven automations, and I own them end to end:
+database and server through interface, motion and deployment.
 
-| Script          | What it does                          |
-| --------------- | ------------------------------------- |
-| `npm run dev`   | Development server (Turbopack)        |
-| `npm run build` | Production build + TypeScript check   |
-| `npm run start` | Serve the production build            |
-| `npm run lint`  | ESLint (Next.js core-web-vitals + TS) |
+[**Portfolio**](https://talha-portfolio-mu-nine.vercel.app) ·
+[**Download CV**](public/Muhammad-Talha-CV.pdf) ·
+[LinkedIn](https://www.linkedin.com/in/muhammad-talha-881265176/) ·
+[GitHub](https://github.com/TalhaZahid13) ·
+[Email](mailto:talhazahid710@gmail.com)
 
-Type-check on its own with `npx tsc --noEmit` (run `npx next typegen` first on a fresh clone).
+</div>
 
-## Routes
+---
 
-| Route               | Purpose                                                                 |
-| ------------------- | ----------------------------------------------------------------------- |
-| `/`                 | Hero with portrait, featured project reel, intro, stack overview, CTA   |
-| `/projects`         | Fanned-deck header, filter + search, Gallery / Index views, other work  |
-| `/projects/[slug]`  | Case study per project — scrollable full-page screenshot, facts, links  |
-| `/about`            | Background, approach, spec sheet, WebGL “Lab” playground                |
-| `/experience`       | Career timeline and education (from the CV)                             |
-| `/skills`           | Bento grid of skills and tools                                          |
-| `/contact`          | Contact details, copy-email, mail-composer form                         |
+## Who I am
 
-All pages are statically generated, so direct links and refreshes work on any route. Unknown routes
-render `app/not-found.tsx` with a 404 status.
+I'm a full stack developer and AI automation engineer with hands-on industry experience since 2023 and a
+BS in Computer Science from Riphah International University (2022–2026). I've shipped work for clients in
+healthcare, finance, automotive, retail and the public sector, plus a long list of live websites for US
+local-service businesses and independent brands.
 
-## Stack
+Today I **lead a development team at Syncognix**: I plan sprints, assign work, review code and turn client
+requirements into technical decisions. I still write production code every day.
 
-- **Next.js 16** (App Router, TypeScript, static generation) and **React 19**
-- **CSS Modules** + design tokens in `src/app/globals.css` (no CSS framework)
-- **Fonts** via `next/font`: Geist (UI), Geist Mono (labels), Fraunces (editorial serif)
-- **Motion** — GSAP + ScrollTrigger for scroll-scrubbed effects; Motion (`motion/react`) for component
-  state, presence and layout animations; Lenis for smooth scrolling (disabled for reduced motion)
-- **Three.js** — one lazily loaded reeded-glass shader (`src/lib/reededGlass.ts`) used in the About-page
-  Lab, with a CSS fallback for no-WebGL or low-power devices
+> “Great software is invisible — it makes complex tasks feel effortless.”
 
-## Project structure
+## Why hire me
 
-```
-src/
-  app/                 routes, layout, metadata, sitemap, robots, OG image, favicon
-  components/          UI (Nav, Footer, Hero, Experience, Skills, Lab, …)
-    work/              project reel, explorer (gallery + index), visuals, other work
-    contact/           contact form, copy-email, CTA band
-    home/              home-only sections
-  data/                profile.ts · projects.ts · experience.ts · skills.ts   ← edit content here
-  lib/                 hooks, scroll helpers, GSAP setup, shader engine
-public/
-  work/                project screenshots (desktop, mobile, full-page)
-  Personal-Pic.jpeg    portrait (file name is case-sensitive on Vercel)
-  Muhammad-Talha-CV.pdf
-```
+- **I own the whole path.** Requirements, database design, APIs, auth, UI, deployment and maintenance. You
+  don't need three people to get one feature live.
+- **I lead as well as build.** I run sprint planning, mentor developers and do code reviews, so delivery stays
+  on time and the codebase stays consistent.
+- **I automate the repetitive work.** I build n8n, Make.com and OpenAI/Groq pipelines that connect CRMs, cloud
+  workspaces and messaging tools so teams stop copying data by hand.
+- **I design with intent.** Typography, motion (GSAP, Three.js) and performance are part of the job, not an
+  afterthought. The sites I ship look good, load fast and convert.
+- **I've shipped a lot of real work.** 15+ live client websites and platforms, plus internal systems such as a
+  stocks trading app, an accounting system, an inventory system and an election campaign platform.
 
-### Adding a project
+## Experience
 
-1. Capture screenshots into `public/work/`: `<slug>.webp` (1440×900), optionally `<slug>-mobile.webp`
-   (390×844) and `<slug>-long.webp` (960 wide, full page).
-2. Add an entry to `projects` in `src/data/projects.ts` (set `media.mobile` / `media.long` to match).
-3. To feature it on the home page, add the slug to `featuredSlugs` in the same file.
+### Syncognix: Team Lead & Full Stack Developer
+*Sep 2026 – Present*
+- Lead and mentor the development team through sprint planning, task assignment and code reviews.
+- Architect and build full-stack web apps, owning technical decisions from requirements to deployment.
+- Turn stakeholder requirements into technical solutions and keep Git workflows consistent across the team.
 
-The case-study page, sitemap entry and filters update automatically.
+`React` `TypeScript` `Node.js` `SQL & NoSQL` `Git`
 
-### Updating the CV
+### Ingenious Concepts: Full Stack Developer
+*Jan 2026 – Aug 2026 · Full-time, on-site, Lahore*
+- Delivered full-stack client apps covering responsive UIs, APIs, database integration, authentication and CRUD.
+- Built, deployed and maintained sites on cPanel, with Firebase and Supabase for auth and real-time data.
+- Shipped Pawfect, Natural Languages, Election Campaign System, Novious Global, Sehat Makaan, PCG and Sygnifin.
 
-Replace `public/Muhammad-Talha-CV.pdf` (self-hosted so the download is direct and reliable). The Google
-Drive original is linked as `profile.cv.driveUrl` in `src/data/profile.ts`.
+`React` `TypeScript` `MySQL` `Firebase` `Supabase` `WordPress` `cPanel`
 
-## Notes
+### Ingenious Concepts: AI Automation & Web Development Intern
+*Oct 2025 – Jan 2026*
+- Built REST APIs in Python (Flask) and Node.js with authentication, validation and error handling.
+- Designed PostgreSQL and MySQL databases and containerised services with Docker.
+- Built AI automation workflows with OpenAI APIs, n8n and Make.com for five client projects.
+- Developed an AI code debugger that classifies errors automatically, using Scikit-learn and Tesseract OCR.
 
-- **Scrollbar** — the page scrollbar is hidden visually (`globals.css`); the fixed gradient bar at the
-  top shows scroll progress on every page. The featured reel has its own always-visible scrollbar.
-- **Contact form** — there is no backend; the form composes an email in the visitor’s mail app and says
-  so. To store submissions, connect a form service and update `ContactForm.tsx`.
-- **Links** — internal links prefetch on hover/focus (`components/IntentLink.tsx`) instead of on view.
-- **Footer year** is set in `Footer.tsx`.
+`Python` `Flask` `Node.js` `PostgreSQL` `Docker` `n8n` `Make.com` `OpenAI`
 
-## Deployment (Vercel)
+### DirectFN: Full Stack Developer (Intern)
+*Apr 2025 – Sep 2025*
+- Worked in a five-person team that built a stocks trading app, an accounting system and an inventory
+  system from scratch.
 
-No extra configuration is needed: import the repository in Vercel (framework preset **Next.js**,
-build command `next build`). If the production domain changes, update `profile.siteUrl` in
-`src/data/profile.ts` — it drives canonical URLs, Open Graph, the sitemap and robots.txt.
+`React` `Node.js` `SQLYog` `Docker`
+
+### Lemon Studios: Web Developer (Intern)
+*Apr 2023 – Dec 2023*
+- Built MERN-stack features and cross-platform mobile functionality with Flutter and React Native.
+
+`MongoDB` `Express` `React` `Node.js` `Flutter` `React Native`
+
+### Education
+**BS Computer Science**, Riphah International University, Lahore (Oct 2022 – Jul 2026)
+
+## Skills
+
+| Area                | Tools                                                                  |
+| ------------------- | ---------------------------------------------------------------------- |
+| Frontend            | React.js, Next.js, TypeScript, JavaScript, Vue.js, WordPress           |
+| Backend             | Node.js, Express, Python (Flask), REST APIs & webhooks, C# / .NET      |
+| Databases           | PostgreSQL, MySQL, MongoDB, Firebase, Supabase                         |
+| AI & automation     | n8n, Make.com, OpenAI API, Groq API, LLM integration, prompt engineering |
+| Mobile              | Flutter, React Native                                                  |
+| Motion & 3D         | GSAP, ScrollTrigger, Framer Motion, Lenis, Three.js / WebGL            |
+| DevOps & tools      | Git & GitHub, Docker, CI/CD, AWS, cPanel, Postman, Figma               |
+| Performance & SEO   | Core Web Vitals, image optimisation, lazy loading, semantic HTML, on-page SEO |
+
+## Selected work
+
+| Project | What it is | Stack |
+| ------- | ---------- | ----- |
+| [Sehat Makaan](https://sehatmakaan.com/) | Bookable clinical spaces for healthcare practitioners | WordPress |
+| [Natural Languages](https://demo.ingeniousc.com/natural-languages-1/) | Accessibility-first site for an interpreting & translation agency | React, GSAP |
+| [Kariss Tax Prep](https://karisstaxprepllc.com/) | Editorial site for a tax & accounting practice | Next.js |
+| [Dopamine Mobile Mechanic](https://www.dopmm.com/) | Call- and booking-first site for a Tampa Bay mechanic | Next.js |
+| [RODO](https://rodoperfumes.com/) | Storefront for an independent fragrance house | Vite, Lenis |
+| [Novious Global](https://novious-global.vercel.app/) | Sourcing partner for global buyers and Chinese manufacturers | React, Vite |
+| [Inventory Management System](https://inventory-management-system-r2rz.vercel.app/) | Inventory & sales dashboard with charts and CSV export | React, Vite |
+
+Projects without a public link include an **Election Campaign System** with role-based access control,
+**SafarSync** (an AI travel platform with group location tracking and SOS), and the **SMAC** mobile app
+for ZNZ Communications. See every project, with screenshots, on the
+[portfolio](https://talha-portfolio-mu-nine.vercel.app/projects).
+
+## Let's talk
+
+I'm open to full-time roles, contracts and freelance projects, remote or on-site.
+
+- **Email:** [talhazahid710@gmail.com](mailto:talhazahid710@gmail.com)
+- **Phone / WhatsApp:** [+92 316 4247480](https://wa.me/923164247480)
+- **LinkedIn:** [muhammad-talha](https://www.linkedin.com/in/muhammad-talha-881265176/)
+- **CV:** [Muhammad-Talha-CV.pdf](public/Muhammad-Talha-CV.pdf)
+
+---
+
+<sub>This repository holds the source of my portfolio site (Next.js 16, React 19, GSAP, Three.js).
+Run it locally with `npm install && npm run dev`.</sub>
