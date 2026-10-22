@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "project": {
+    "name": "talha-portfolio",
+    "productType": null,
+    "stack": [
+      "nextjs",
+      "react"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "src/app/globals.css"
+    ],
+    "components": [],
+    "assets": [],
+    "instructions": [
+      "AGENTS.md"
+    ]
+  },
+  "design": {
+    "colorMode": "light",
+    "colors": {
+      "--accent": {
+        "value": "#ff5a2a",
+        "source": "src/app/globals.css"
+      },
+      "--accent-ink": {
+        "value": "#ff7a52",
+        "source": "src/app/globals.css"
+      },
+      "--accent-contrast": {
+        "value": "#140904",
+        "source": "src/app/globals.css"
+      },
+      "--glass-border": {
+        "value": "rgb(255 255 255 / 0.12)",
+        "source": "src/app/globals.css"
+      }
+    },
+    "typography": {
+      "--font-sans": {
+        "value": "var(--font-geist), ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "source": "src/app/globals.css"
+      },
+      "--font-serif": {
+        "value": "var(--font-fraunces), \"Iowan Old Style\", Georgia, serif",
+        "source": "src/app/globals.css"
+      },
+      "--font-mono": {
+        "value": "var(--font-geist-mono), ui-monospace, \"SFMono-Regular\", Menlo, Consolas, monospace",
+        "source": "src/app/globals.css"
+      }
+    },
+    "spacing": {
+      "--gutter": {
+        "value": "clamp(16px, 4vw, 48px)",
+        "source": "src/app/globals.css"
+      }
+    },
+    "radius": {
+      "--radius-s": {
+        "value": "6px",
+        "source": "src/app/globals.css"
+      },
+      "--radius-m": {
+        "value": "14px",
+        "source": "src/app/globals.css"
+      },
+      "--radius-l": {
+        "value": "24px",
+        "source": "src/app/globals.css"
+      }
+    },
+    "shadows": {
+      "--glass-shadow": {
+        "value": "0 1px 0 rgb(255 255 255 / 0.09) inset, 0 -1px 0 rgb(0 0 0 / 0.4) inset,\r\n    0 18px 40px -16px rgb(0 0 0 / 0.7)",
+        "source": "src/app/globals.css"
+      }
+    },
+    "motion": {
+      "--ease-out": {
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "source": "src/app/globals.css"
+      },
+      "--ease-in-out": {
+        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+        "source": "src/app/globals.css"
+      }
+    },
+    "density": "unknown"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [],
+    "avoid": []
+  },
+  "decisions": [
+    "Use skyleen77 cursor arrow without CursorFollow text; cursor fill matches the light theme ink black #121210.",
+    "Use a single skippable Muhammad Talha vapour particle splash on document entry, respecting reduced motion."
+  ],
+  "evidence": [
+    {
+      "fact": "design.colorMode:light",
+      "source": "src/app/globals.css"
+    },
+    {
+      "fact": "design.tokens",
+      "source": "src/app/globals.css"
+    },
+    {
+      "fact": "project.instructions",
+      "source": "AGENTS.md"
+    },
+    {
+      "fact": "project.stack:nextjs",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:react",
+      "source": "package.json"
+    }
+  ],
+  "generatedAt": "2026-10-22T15:39:33.192Z"
+}

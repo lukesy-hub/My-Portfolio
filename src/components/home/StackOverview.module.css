@@ -1,5 +1,6 @@
+/* No fill of its own: the home page backdrop tints this section on scroll. */
 .stack {
-  background: var(--bg-2);
+  background: transparent;
 }
 
 .rows {

@@ -4,6 +4,8 @@ import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { CustomCursor } from "@/components/CustomCursor";
+import { SplashScreen } from "@/components/SplashScreen";
 import { profile, socials } from "@/data/profile";
 import "./globals.css";
 
@@ -106,6 +108,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body>
+        <CustomCursor />
+        <SplashScreen />
         <a href="#main" className="skip-link">
           Skip to content
         </a>

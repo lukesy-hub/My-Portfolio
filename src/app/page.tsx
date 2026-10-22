@@ -1,6 +1,7 @@
 import { Link } from "@/components/IntentLink";
 import { ContactCta } from "@/components/contact/ContactCta";
 import { Hero } from "@/components/Hero";
+import { HomeBackdrop } from "@/components/home/HomeBackdrop";
 import { Intro } from "@/components/home/Intro";
 import { StackOverview } from "@/components/home/StackOverview";
 import { SectionHead } from "@/components/SectionHead";
@@ -10,7 +11,7 @@ import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <>
+    <HomeBackdrop>
       <Hero />
 
       <section id="home-work" className={`section ${styles.work}`} aria-labelledby="home-work-title">
@@ -35,6 +36,6 @@ export default function Home() {
       <Intro />
       <StackOverview />
       <ContactCta />
-    </>
+    </HomeBackdrop>
   );
 }

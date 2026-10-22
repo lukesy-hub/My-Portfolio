@@ -30,6 +30,13 @@
   --code-fn: #4b4fb8;
   --code-com: #8a867c;
 
+  /* Home page backdrop, one tint per section in order (HomeBackdrop.tsx). */
+  --home-bg-0: #efece5; /* hero: paper */
+  --home-bg-1: #e3d6c0; /* selected work: sand */
+  --home-bg-2: #d4ddcc; /* intro: sage */
+  --home-bg-3: #d1d9e3; /* stack: mist */
+  --home-bg-4: #e8d0c1; /* contact: clay */
+
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-serif: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
@@ -68,6 +75,11 @@
   --code-str: #7fd1b0;
   --code-fn: #9fa6ff;
   --code-com: #77736a;
+  --home-bg-0: #0c0c0b;
+  --home-bg-1: #15120e;
+  --home-bg-2: #0e1410;
+  --home-bg-3: #0e1116;
+  --home-bg-4: #18100c;
   color-scheme: dark;
 }
 
