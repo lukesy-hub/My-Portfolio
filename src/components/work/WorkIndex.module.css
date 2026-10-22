@@ -1,0 +1,337 @@
+.index {
+  margin-top: clamp(96px, 12vw, 160px);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 20px;
+  margin-bottom: clamp(28px, 4vw, 48px);
+  border-bottom: 1px solid var(--line);
+}
+
+.heading {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.heading :global(.mono) {
+  font-size: 13px;
+  color: var(--ink-3);
+  vertical-align: super;
+  letter-spacing: 0;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+
+.filter {
+  position: relative;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  color: var(--ink-2);
+  transition: color 0.3s var(--ease-out);
+}
+
+.filter:hover,
+.filter[aria-pressed="true"] {
+  color: var(--bg);
+}
+
+.filter:hover:not([aria-pressed="true"]) {
+  color: var(--ink);
+}
+
+.filterBg {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--ink);
+}
+
+.filterText {
+  position: relative;
+  z-index: 1;
+}
+
+.filterText sup {
+  margin-left: 3px;
+  font-size: 9.5px;
+  opacity: 0.7;
+}
+
+/* ─── Grid ─── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(40px, 5vw, 72px) clamp(16px, 2vw, 28px);
+  align-items: start;
+}
+
+.cell {
+  grid-column: span var(--span);
+}
+
+/* Offset some cells off the baseline for an asymmetric, magazine-like rhythm. */
+.cell[data-shape="square"]:nth-child(7n + 4) {
+  margin-top: clamp(24px, 5vw, 80px);
+}
+
+.cell[data-shape="tall"] {
+  margin-top: clamp(0px, 3vw, 48px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ─── Media ─── */
+.media {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border-radius: 14px;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(16px, 2.4vw, 36px);
+  background: color-mix(in srgb, var(--tint) 14%, var(--bg-2));
+}
+
+:global([data-theme="dark"]) .media {
+  background: color-mix(in srgb, var(--tint) 16%, var(--bg-2));
+}
+
+.cell[data-shape="square"] .media {
+  aspect-ratio: 4 / 3.4;
+  display: flex;
+  align-items: center;
+}
+
+.cell[data-shape="wide"] .media {
+  aspect-ratio: 16 / 11;
+  display: flex;
+  align-items: center;
+}
+
+.tintWash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(70% 60% at 85% 10%, color-mix(in srgb, var(--tint) 45%, transparent), transparent 70%),
+    linear-gradient(to bottom, transparent, color-mix(in srgb, var(--ink) 6%, transparent));
+  transition: opacity 0.6s var(--ease-out);
+}
+
+.browser {
+  width: 100%;
+  transition: transform 0.9s var(--ease-out);
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Tall cards: a layered browser + phone composition. */
+.tallStage {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+}
+
+.tallBrowser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 88%;
+  transition: transform 0.9s var(--ease-out);
+}
+
+.tallPhone {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 42%;
+  padding: 5px;
+  border-radius: 22px;
+  background: #0e0e0d;
+  box-shadow: 0 30px 50px -20px rgb(0 0 0 / 0.55);
+  transition: transform 0.9s var(--ease-out);
+}
+
+.tallPhone img {
+  width: 100%;
+  height: auto;
+  border-radius: 17px;
+}
+
+/* ─── Hover / focus reveal ─── */
+.reveal {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+}
+
+.revealText,
+.revealCta {
+  position: relative;
+  z-index: 1;
+}
+
+.revealCta {
+  color: var(--accent-ink);
+  font-size: 11px;
+}
+
+@media (hover: hover) {
+  .media:hover .reveal,
+  .media:focus-visible .reveal {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .media:hover .browser,
+  .media:hover .tallBrowser {
+    transform: translateY(-6px) scale(1.015);
+  }
+
+  .media:hover .tallPhone {
+    transform: translate(-6px, -10px) rotate(-2deg);
+  }
+}
+
+/* ─── Caption (always visible — nothing essential is hover-only) ─── */
+.caption {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: start;
+}
+
+.num {
+  padding-top: 5px;
+  color: var(--ink-3);
+}
+
+.captionMain {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name {
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.meta {
+  color: var(--ink-3);
+  font-size: 11px;
+  text-transform: none;
+}
+
+.visit {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  font-size: 16px;
+  transition: background-color 0.35s var(--ease-out), color 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+}
+
+.visit:hover,
+.visit:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-contrast);
+  transform: rotate(45deg);
+}
+
+.visit:hover span,
+.visit:focus-visible span {
+  display: inline-block;
+  transform: rotate(-45deg);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1100px) {
+  .cell {
+    grid-column: span 6;
+  }
+
+  .cell[data-shape="square"]:nth-child(7n + 4) {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+    row-gap: 48px;
+  }
+
+  .cell {
+    grid-column: 1 / -1;
+  }
+
+  .cell[data-shape="tall"] {
+    margin-top: 0;
+  }
+
+  .cell[data-shape] .media {
+    aspect-ratio: auto;
+  }
+
+  .tallStage {
+    aspect-ratio: 5 / 4.4;
+  }
+
+  .tallBrowser {
+    width: 84%;
+  }
+
+  .tallPhone {
+    width: 34%;
+  }
+
+  .filters {
+    border-radius: 18px;
+  }
+}

@@ -1,0 +1,241 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 12px 12px 0;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.panel {
+  position: relative;
+  width: min(1320px, 100%);
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 28px 28px 0 0;
+  background: var(--surface);
+  box-shadow: 0 0 0 1px var(--line), 0 -30px 80px -30px rgb(0 0 0 / 0.4);
+  outline: none;
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 340px;
+  pointer-events: none;
+  background: radial-gradient(60% 100% at 20% 0%, color-mix(in srgb, var(--tint) 22%, transparent), transparent 70%);
+}
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px clamp(16px, 3vw, 36px);
+  color: var(--ink-3);
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 1;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.close span {
+  position: relative;
+  z-index: 1;
+}
+
+.close:hover {
+  transform: rotate(90deg);
+}
+
+.body {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(24px, 4vw, 64px);
+  padding: 0 clamp(16px, 3vw, 36px) clamp(32px, 4vw, 56px);
+}
+
+/* ─── Screenshot column ─── */
+.shotCol {
+  position: sticky;
+  top: 76px;
+  align-self: start;
+}
+
+.browser {
+  width: 100%;
+}
+
+.shotScroller {
+  height: min(68dvh, 720px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.longShot {
+  width: 100%;
+  height: auto;
+}
+
+.hint {
+  margin-top: 10px;
+  color: var(--ink-3);
+  font-size: 10.5px;
+  text-transform: none;
+}
+
+/* ─── Info column ─── */
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.kicker {
+  color: var(--accent-ink);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-weight: 350;
+  font-size: clamp(2.4rem, 4.6vw, 4.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  font-variation-settings: "opsz" 120;
+}
+
+.summary {
+  font-size: 1.0625rem;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+
+.facts > div {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.facts > div:nth-child(odd) {
+  padding-right: 16px;
+}
+
+.facts dt {
+  color: var(--ink-3);
+  font-size: 10.5px;
+  margin-bottom: 4px;
+}
+
+.facts dd {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.subhead {
+  color: var(--ink-3);
+  margin-top: 8px;
+}
+
+.highlights {
+  display: grid;
+  gap: 10px;
+  counter-reset: h;
+}
+
+.highlights li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  color: var(--ink-2);
+  counter-increment: h;
+}
+
+.highlights li::before {
+  content: counter(h, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding-top: 4px;
+  color: var(--accent-ink);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.phone {
+  width: 150px;
+  padding: 5px;
+  border-radius: 22px;
+  background: #0e0e0d;
+  box-shadow: 0 24px 40px -20px rgb(0 0 0 / 0.5);
+}
+
+.phone img {
+  width: 100%;
+  height: auto;
+  border-radius: 17px;
+}
+
+.next {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  color: var(--ink-3);
+}
+
+.nextName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  transition: color 0.3s var(--ease-out);
+}
+
+.next:hover .nextName {
+  color: var(--accent-ink);
+}
+
+@media (max-width: 900px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .shotCol {
+    position: static;
+  }
+
+  .shotScroller {
+    height: 56dvh;
+  }
+
+  .phone {
+    display: none;
+  }
+}

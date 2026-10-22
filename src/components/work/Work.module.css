@@ -1,0 +1,83 @@
+.work {
+  padding-bottom: clamp(80px, 10vw, 140px);
+}
+
+.other {
+  margin-top: clamp(96px, 12vw, 160px);
+}
+
+.otherTitle {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.otherTitle :global(.serif) {
+  font-weight: 350;
+  color: var(--ink-2);
+}
+
+.otherLede {
+  margin-top: 12px;
+  color: var(--ink-2);
+  max-width: 60ch;
+}
+
+.otherList {
+  margin-top: 36px;
+  border-top: 1px solid var(--line-strong);
+}
+
+.otherRow {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 3fr) minmax(0, 5fr) minmax(0, 3fr);
+  gap: 20px;
+  align-items: baseline;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  transition: background-color 0.4s var(--ease-out), padding 0.4s var(--ease-out);
+}
+
+.otherRow > :global(.mono) {
+  color: var(--ink-3);
+}
+
+.otherRow:hover {
+  background: var(--bg-2);
+  padding-inline: 12px;
+}
+
+.otherName {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size: 1.0625rem;
+}
+
+.otherDetail {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.otherTech {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+@media (max-width: 900px) {
+  .otherRow {
+    grid-template-columns: 36px 1fr;
+    row-gap: 8px;
+  }
+
+  .otherDetail,
+  .otherTech {
+    grid-column: 2;
+  }
+
+  .otherTech {
+    justify-content: flex-start;
+  }
+}

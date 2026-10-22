@@ -1,0 +1,264 @@
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  z-index: 70;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--chroma-b), var(--accent) 60%, var(--chroma-c));
+}
+
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: var(--nav-h);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 12px var(--gutter) 0;
+  pointer-events: none;
+}
+
+.header > * {
+  pointer-events: auto;
+}
+
+/* ─── Brand ─── */
+.brand {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: var(--bg);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  transition: transform 0.5s var(--ease-out), border-radius 0.5s var(--ease-out);
+}
+
+.brandMark span {
+  color: var(--accent);
+}
+
+.brand:hover .brandMark {
+  transform: rotate(-8deg);
+  border-radius: 50%;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+
+.brandText :global(.mono) {
+  font-size: 10.5px;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.header[data-compact="true"] .brandText {
+  opacity: 0;
+  transform: translateX(-8px);
+  pointer-events: none;
+}
+
+/* ─── Pill ─── */
+.pill {
+  border-radius: 999px;
+  padding: 5px;
+  transition: padding 0.4s var(--ease-out);
+}
+
+.pill ul {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 2px;
+}
+
+.header[data-compact="true"] .pill {
+  padding: 3px;
+}
+
+.link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-2);
+  transition: color 0.3s var(--ease-out);
+}
+
+.link:hover,
+.link[aria-current] {
+  color: var(--ink);
+}
+
+.linkText {
+  position: relative;
+  z-index: 1;
+}
+
+.activeBg {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08), inset 0 0 0 1px var(--line);
+}
+
+:global([data-theme="dark"]) .activeBg {
+  background: rgb(255 255 255 / 0.08);
+}
+
+/* ─── Actions ─── */
+.actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cv {
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+.menuBtn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  place-items: center;
+}
+
+.burger {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 5px;
+  width: 18px;
+}
+
+.burger span {
+  height: 1.5px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.burger[data-open="true"] span:first-child {
+  transform: translateY(3.25px) rotate(45deg);
+}
+
+.burger[data-open="true"] span:last-child {
+  transform: translateY(-3.25px) rotate(-45deg);
+}
+
+/* ─── Mobile sheet ─── */
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(var(--nav-h) + 40px) var(--gutter) 32px;
+  background: var(--bg);
+}
+
+.sheetList {
+  display: flex;
+  flex-direction: column;
+}
+
+.sheetList a {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(2.2rem, 10vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+
+.sheetList a :global(.mono) {
+  color: var(--ink-3);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.sheetList a[aria-current] {
+  color: var(--accent-ink);
+}
+
+.sheetFoot {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sheetSocials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  color: var(--ink-2);
+}
+
+.sheetSocials a {
+  display: inline-block;
+  padding: 8px 0;
+}
+
+@media (max-width: 960px) {
+  .header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .pill {
+    display: none;
+  }
+
+  .menuBtn {
+    display: grid;
+  }
+
+  .header[data-compact="true"] .brandText {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .brandText {
+    display: none;
+  }
+
+  .cv {
+    padding: 0 14px;
+  }
+}
