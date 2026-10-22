@@ -1,0 +1,466 @@
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 16px);
+}
+
+.card {
+  --mx: 50%;
+  --my: 0%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: clamp(20px, 2.2vw, 30px);
+  border-radius: var(--radius-l);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Pointer spotlight — tinted light that follows the cursor across the card. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(360px circle at var(--mx) var(--my), color-mix(in srgb, var(--accent) 10%, transparent), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.cardHead h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.cardHead :global(.mono) {
+  color: var(--ink-3);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+/* ─── Placement ─── */
+.frontend {
+  grid-column: span 7;
+  grid-row: span 2;
+}
+
+.motion {
+  grid-column: span 5;
+}
+
+.ai {
+  grid-column: span 5;
+}
+
+.backend {
+  grid-column: span 5;
+}
+
+.mobile {
+  grid-column: span 3;
+}
+
+.design {
+  grid-column: span 4;
+}
+
+.tools {
+  grid-column: span 6;
+}
+
+.perf {
+  grid-column: span 6;
+}
+
+/* ─── Frontend ─── */
+.frontend {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: transparent;
+}
+
+.frontend .cardHead :global(.mono) {
+  color: color-mix(in srgb, var(--bg) 55%, transparent);
+}
+
+.specimen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.35em;
+  font-size: clamp(2rem, 4.2vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+}
+
+.specimen li:nth-child(even) {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 350;
+  letter-spacing: -0.03em;
+  color: color-mix(in srgb, var(--bg) 70%, var(--accent));
+}
+
+.specimen li:not(:last-child)::after {
+  content: "/";
+  margin-left: 0.3em;
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 300;
+  color: color-mix(in srgb, var(--bg) 30%, transparent);
+}
+
+.code {
+  margin-top: auto;
+  padding: 18px 20px;
+  border-radius: var(--radius-m);
+  background: color-mix(in srgb, var(--bg) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bg) 12%, transparent);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  overflow-x: auto;
+  color: color-mix(in srgb, var(--bg) 85%, transparent);
+}
+
+.k {
+  color: #ff8a64;
+}
+
+.f {
+  color: #a9b0ff;
+}
+
+.s {
+  color: #86d6b4;
+}
+
+.c {
+  color: color-mix(in srgb, var(--bg) 45%, transparent);
+}
+
+:global([data-theme="dark"]) .k {
+  color: #c2410c;
+}
+
+:global([data-theme="dark"]) .f {
+  color: #4338ca;
+}
+
+:global([data-theme="dark"]) .s {
+  color: #15803d;
+}
+
+/* ─── Motion ─── */
+.curveWrap {
+  position: relative;
+  height: 140px;
+}
+
+.curve {
+  width: 100%;
+  height: 120px;
+  overflow: visible;
+}
+
+.curveGuide {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-dasharray: 3 4;
+}
+
+.curvePath {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 2.8s var(--ease-out) infinite;
+}
+
+.ball {
+  fill: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ball {
+    display: none;
+  }
+}
+
+.curveLabel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 10.5px;
+  color: var(--ink-3);
+  text-transform: none;
+}
+
+@keyframes draw {
+  60%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ─── AI flow ─── */
+.flow {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.flowLine {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 5;
+  animation: flow 1.2s linear infinite;
+}
+
+.nodeBox {
+  fill: var(--bg-2);
+  stroke: var(--line-strong);
+}
+
+.nodeHot {
+  fill: var(--ink);
+}
+
+.nodeText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--ink);
+}
+
+.nodeHot + .nodeText {
+  fill: var(--bg);
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+
+/* ─── Backend ─── */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.monoList {
+  display: grid;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+.monoList li::before {
+  content: "› ";
+  color: var(--accent-ink);
+}
+
+/* ─── Mobile ─── */
+.phoneGlyph {
+  align-self: center;
+  width: 64px;
+  height: 112px;
+  border-radius: 16px;
+  border: 1.5px solid var(--ink);
+  padding: 6px;
+}
+
+.phoneGlyph span {
+  display: block;
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(160deg, var(--chroma-b), var(--accent) 55%, var(--chroma-c));
+  animation: screen 6s var(--ease-in-out) infinite alternate;
+  background-size: 100% 200%;
+}
+
+@keyframes screen {
+  to {
+    background-position: 0 100%;
+  }
+}
+
+/* ─── Design language ─── */
+.styles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.styles li {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  font-size: 15px;
+}
+
+.sSwiss {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: transparent !important;
+  border-radius: 0 !important;
+}
+
+.sNeo {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 17px !important;
+}
+
+.sGlass {
+  border-radius: 999px !important;
+  background-image: linear-gradient(120deg, color-mix(in srgb, var(--chroma-c) 30%, transparent), color-mix(in srgb, var(--chroma-a) 25%, transparent));
+}
+
+.sGlass span {
+  position: relative;
+  z-index: 1;
+}
+
+.sBento i {
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--ink-3);
+}
+
+.sBento i:first-child {
+  width: 10px;
+}
+
+.sBento i:nth-child(3) {
+  margin-right: 4px;
+}
+
+.sEditorial {
+  font-family: var(--font-serif);
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+}
+
+.sTheme {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.sTheme span {
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.sTheme span:first-child {
+  background: #efece5;
+  color: #121210;
+}
+
+.sTheme span:last-child {
+  background: #121210;
+  color: #efece5;
+}
+
+/* ─── Tools ─── */
+.gitlog {
+  display: grid;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+.hash {
+  color: var(--accent-ink);
+}
+
+/* ─── Perf ─── */
+.checks {
+  display: grid;
+  gap: 9px;
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+
+.checks li {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.checks li::before {
+  content: "✓";
+  font-size: 12px;
+  color: var(--accent-ink);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1100px) {
+  .frontend {
+    grid-column: span 12;
+    grid-row: auto;
+  }
+
+  .motion,
+  .ai,
+  .backend {
+    grid-column: span 6;
+  }
+
+  .mobile {
+    grid-column: span 6;
+  }
+
+  .design,
+  .tools,
+  .perf {
+    grid-column: span 6;
+  }
+
+  .perf {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 680px) {
+  .bento > * {
+    grid-column: 1 / -1 !important;
+  }
+
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+}

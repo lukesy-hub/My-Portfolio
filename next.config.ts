@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
-};
+// Every page is static (no request-time data), so the default static
+// generation is used — Cache Components / partial prerendering add nothing here.
+const nextConfig: NextConfig = {};
 
 export default nextConfig;

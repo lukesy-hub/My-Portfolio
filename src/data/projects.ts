@@ -30,7 +30,6 @@ export type Project = {
   media: { mobile: boolean; long: boolean };
   /** Long screenshot height at 960px wide, for layout reservation. */
   longHeight?: number;
-  featured?: boolean;
 };
 
 export const projects: Project[] = [
@@ -52,7 +51,6 @@ export const projects: Project[] = [
     tint: "#B9875A",
     media: { mobile: true, long: true },
     longHeight: 3200,
-    featured: true,
   },
   {
     slug: "rodo",
@@ -71,7 +69,6 @@ export const projects: Project[] = [
     tint: "#6F7B4E",
     media: { mobile: true, long: true },
     longHeight: 3200,
-    featured: true,
   },
   {
     slug: "natural-languages-1",
@@ -95,7 +92,6 @@ export const projects: Project[] = [
     tint: "#3E8C7E",
     media: { mobile: true, long: true },
     longHeight: 3200,
-    featured: true,
   },
   {
     slug: "dopamine",
@@ -115,7 +111,6 @@ export const projects: Project[] = [
     tint: "#E0262B",
     media: { mobile: true, long: true },
     longHeight: 3200,
-    featured: true,
   },
   {
     slug: "layaan",
@@ -134,7 +129,6 @@ export const projects: Project[] = [
     tint: "#1F6B5C",
     media: { mobile: true, long: true },
     longHeight: 3200,
-    featured: true,
   },
   {
     slug: "sehat-makaan",
@@ -155,7 +149,6 @@ export const projects: Project[] = [
     tint: "#1E7B74",
     media: { mobile: true, long: true },
     longHeight: 3200,
-    featured: true,
   },
   {
     slug: "kariss-tax",
@@ -346,7 +339,9 @@ export const projects: Project[] = [
 
 export const categories: ProjectCategory[] = ["Automotive", "Commerce", "Services", "Platforms"];
 
-export const featuredProjects = projects.filter((p) => p.featured);
+// Home page reel — curated order.
+const featuredSlugs = ["kariss-tax", "dtv-mounting", "rodo", "dopamine", "layaan", "dumpster-chics"];
+export const featuredProjects = featuredSlugs.map((slug) => projects.find((p) => p.slug === slug)!);
 
 /** Other work from the CV that has no public link. */
 export const otherWork: { name: string; detail: string; tech: string[] }[] = [

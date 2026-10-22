@@ -1,32 +1,19 @@
 "use client";
 
-import { useMemo, useRef } from "react";
-import { profile } from "@/data/profile";
+import { useRef } from "react";
+import Image from "next/image";
+import { Link } from "@/components/IntentLink";
+import { portrait, profile } from "@/data/profile";
 import { projects } from "@/data/projects";
-import { useLocalTime, useTheme } from "@/lib/hooks";
+import { useLocalTime } from "@/lib/hooks";
 import { gsap, useGSAP } from "@/lib/gsap";
-import type { ReededParams } from "@/lib/reededGlass";
-import { ShaderCanvas } from "./ShaderCanvas";
 import styles from "./Hero.module.css";
-
-const palettes: Record<"light" | "dark", ReededParams> = {
-  light: { ribs: 14, refraction: 0.11, speed: 0.55, colors: ["#ef5124", "#f4b740", "#36b5aa"], background: "#e3dccd" },
-  dark: { ribs: 14, refraction: 0.11, speed: 0.55, colors: ["#ff5a2a", "#c98a1f", "#1f8f87"], background: "#100f0d" },
-};
-
-const terminal = [
-  { cmd: "whoami", out: "muhammad talha — full stack · ai automation · team lead" },
-  { cmd: "cat stack.txt", out: "react  next.js  typescript  node  flutter  n8n" },
-  { cmd: "ls ./work --live | wc -l", out: `${projects.length} live sites ↓` },
-];
 
 export function Hero() {
   const root = useRef<HTMLElement>(null);
-  const theme = useTheme();
   const time = useLocalTime(profile.timeZone);
-  const params = useMemo(() => palettes[theme], [theme]);
 
-  // Scroll-scrubbed parallax: the name drifts apart and the arch rises as you leave.
+  // Leaving the hero: the photo drifts inside its frame, the copy lifts away.
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
@@ -35,9 +22,8 @@ export function Hero() {
           defaults: { ease: "none" },
           scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: true },
         });
-        tl.to("[data-line='1']", { xPercent: -6 }, 0)
-          .to("[data-line='2']", { xPercent: 5 }, 0)
-          .to("[data-arch]", { yPercent: -14, scale: 0.94 }, 0)
+        tl.to("[data-photo]", { yPercent: 8, scale: 1.06 }, 0)
+          .to("[data-frame]", { yPercent: -6 }, 0)
           .to("[data-fade]", { opacity: 0, y: -40 }, 0);
       });
       return () => mm.revert();
@@ -46,88 +32,78 @@ export function Hero() {
   );
 
   return (
-    <section id="top" ref={root} className={styles.hero} aria-labelledby="hero-title">
+    <section ref={root} className={styles.hero} aria-labelledby="hero-title">
       <div className="grid-lines" aria-hidden="true" />
 
       <div className={`container ${styles.inner}`}>
-        <div className={`${styles.meta} mono`} data-fade>
+        <div className={`${styles.meta} mono`}>
           <span>Portfolio ’26 — Index 00</span>
-          <span className={styles.metaMid}>
-            Lahore, PK <span className={styles.dot} aria-hidden="true" /> {time ? `${time} PKT` : "PKT"}
-          </span>
-          <span className={styles.metaEnd}>Now — Team Lead, Syncognix</span>
+          <span className={styles.metaMid}>{profile.role}</span>
+          <span className={styles.metaEnd}>{projects.length} live sites</span>
         </div>
 
-        <h1 id="hero-title" className={styles.title}>
-          <span className={styles.line} data-line="1">
-            <span className={styles.lineInner}>{profile.firstName}</span>
-          </span>
-          <span className={`${styles.line} ${styles.lineTwo}`} data-line="2">
-            <span className={styles.lineInner}>
-              <span className="serif italic">{profile.lastName}</span>
-              <span className={styles.stop}>.</span>
+        <div className={styles.copy} data-fade>
+          <h1 id="hero-title" className={styles.title}>
+            <span className={styles.line}>
+              <span className={styles.lineInner}>{profile.firstName}</span>
             </span>
-          </span>
-          <span className="sr-only"> — {profile.role}</span>
-        </h1>
+            <span className={`${styles.line} ${styles.lineTwo}`}>
+              <span className={`${styles.lineInner} serif italic`}>{profile.lastName}</span>
+            </span>
+          </h1>
 
-        <figure className={styles.arch} data-arch aria-hidden="true">
-          <div className={styles.archGlass}>
-            <div className={styles.archFallback} />
-            <div className={`${styles.archRibs} reeded`} />
-            <ShaderCanvas params={params} loadOn="idle" className={styles.archCanvas} />
-          </div>
-          <figcaption className={`${styles.archCaption} mono`}>
-            <span>Fig. 01</span>
-            <span>Reeded glass — WebGL</span>
-          </figcaption>
-          <span className={`${styles.tick} ${styles.tickTl}`} />
-          <span className={`${styles.tick} ${styles.tickBr}`} />
-        </figure>
+          <p className={styles.headline}>
+            Full Stack Developer <em className="serif italic">&amp;</em> AI&nbsp;Automation Engineer
+          </p>
+          <p className={styles.intro}>
+            I build production websites, web apps and AI-driven automations — owning the whole path from database and APIs
+            to typography, motion and deployment. Currently leading a development team at Syncognix in Lahore.
+          </p>
 
-        <div className={styles.bottom}>
-          <div className={styles.intro}>
-            <p className={styles.role}>
-              Full Stack Developer <em className="serif italic">&amp;</em> AI&nbsp;Automation Engineer
-            </p>
-            <p className={styles.value}>
-              I build production websites, web apps and AI-driven automations — owning the whole path from database
-              and APIs to typography, motion and deployment.
-            </p>
-            <div className={styles.ctas}>
-              <a href="#work" className="btn">
-                Explore selected work <span className="btn__arrow" aria-hidden="true">↗</span>
-              </a>
-              <a href={profile.cv.href} download={profile.cv.fileName} className="btn btn--ghost">
-                Download CV <span className="btn__arrow btn__arrow--down" aria-hidden="true">↓</span>
-              </a>
-            </div>
+          <div className={styles.ctas}>
+            <Link href="/projects" className="btn">
+              View My Work <span className="btn__arrow" aria-hidden="true">↗</span>
+            </Link>
+            <Link href="/contact" className="btn btn--ghost">
+              Contact Me <span className="btn__arrow" aria-hidden="true">→</span>
+            </Link>
           </div>
-
-          <div className={`${styles.terminal} glass`} aria-label="Terminal summary">
-            <div className={styles.termBar} aria-hidden="true">
-              <span />
-              <span />
-              <span />
-              <p className="mono">zsh — talha@lahore</p>
-            </div>
-            <ol className={styles.termBody}>
-              {terminal.map((row, i) => (
-                <li key={row.cmd} style={{ "--i": i } as React.CSSProperties}>
-                  <p className={styles.cmd} style={{ "--chars": row.cmd.length } as React.CSSProperties}>
-                    <span className={styles.prompt} aria-hidden="true">~ %</span>
-                    <span className={styles.typed}>{row.cmd}</span>
-                  </p>
-                  <p className={styles.out}>{row.out}</p>
-                </li>
-              ))}
-            </ol>
-            <span className={styles.cursor} aria-hidden="true" />
-          </div>
+          <a href={profile.cv.href} download={profile.cv.fileName} className={`${styles.cvLink} mono link-underline`}>
+            Download CV · PDF ↓
+          </a>
         </div>
+
+        <figure className={styles.portrait} data-frame>
+          <span className={styles.outline} aria-hidden="true" />
+          <span className={styles.glow} aria-hidden="true" />
+          <div className={styles.frame}>
+            <div className={styles.photo} data-photo>
+              <Image
+                src={portrait.src}
+                alt={portrait.alt}
+                width={portrait.width}
+                height={portrait.height}
+                preload
+                fetchPriority="high"
+                sizes="(max-width: 760px) 86vw, (max-width: 1100px) 40vw, 440px"
+                className={styles.img}
+              />
+            </div>
+            <span className={`${styles.reeds} reeded`} aria-hidden="true" />
+          </div>
+          <span className={`${styles.tick} ${styles.tickTl}`} aria-hidden="true" />
+          {/* Caption sits below the frame so nothing covers the photograph. */}
+          <figcaption className={`${styles.caption} mono`}>
+            <span>Fig. 01 — {profile.name}</span>
+            <span className={styles.captionMeta}>
+              <span className={styles.dot} aria-hidden="true" />
+              Lahore, PK{time ? ` · ${time} PKT` : ""}
+            </span>
+          </figcaption>
+        </figure>
       </div>
 
-      <a href="#work" className={`${styles.scrollCue} mono`} aria-label="Scroll to selected work">
+      <a href="#home-work" className={`${styles.scrollCue} mono`} aria-label="Scroll to selected work">
         <span>Scroll</span>
         <span className={styles.scrollLine} aria-hidden="true" />
       </a>

@@ -1,0 +1,248 @@
+.case {
+  position: relative;
+}
+
+.wash {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 720px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(60% 70% at 85% 0%, color-mix(in srgb, var(--tint) 22%, transparent), transparent 70%);
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--ink-3);
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+.crumbs [aria-current] {
+  color: var(--ink);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 20px;
+  padding-bottom: clamp(40px, 6vw, 72px);
+  margin-bottom: clamp(40px, 6vw, 72px);
+  border-bottom: 1px solid var(--line);
+}
+
+.kicker {
+  grid-column: 1 / -1;
+  color: var(--accent-ink);
+}
+
+.title {
+  grid-column: 1 / span 8;
+  font-family: var(--font-serif);
+  font-weight: 350;
+  font-size: clamp(3rem, 7.5vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-variation-settings: "opsz" 144;
+  text-wrap: balance;
+  animation: page-rise 1s var(--ease-out) both;
+}
+
+.summary {
+  grid-column: 1 / span 6;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.links {
+  grid-column: 7 / -1;
+  align-self: end;
+  justify-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+}
+
+.shotCol {
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+}
+
+.scroller {
+  height: min(74svh, 780px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.longShot {
+  width: 100%;
+  height: auto;
+}
+
+.hint {
+  margin-top: 10px;
+  color: var(--ink-3);
+  font-size: 10.5px;
+  text-transform: none;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.facts {
+  border-top: 1px solid var(--line-strong);
+}
+
+.facts > div {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.facts dt {
+  color: var(--ink-3);
+  font-size: 10.5px;
+  padding-top: 3px;
+}
+
+.facts dd {
+  overflow-wrap: anywhere;
+}
+
+.subhead {
+  color: var(--ink-3);
+  margin-top: 12px;
+}
+
+.highlights {
+  display: grid;
+  gap: 12px;
+  counter-reset: h;
+}
+
+.highlights li {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  color: var(--ink-2);
+  counter-increment: h;
+}
+
+.highlights li::before {
+  content: counter(h, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding-top: 4px;
+  color: var(--accent-ink);
+}
+
+.phone {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 170px;
+  margin-top: 12px;
+}
+
+.phone img {
+  width: 100%;
+  height: auto;
+  padding: 5px;
+  border-radius: 22px;
+  background: #0e0e0d;
+  box-shadow: 0 24px 40px -20px rgb(0 0 0 / 0.5);
+}
+
+.phone figcaption {
+  color: var(--ink-3);
+  font-size: 10.5px;
+}
+
+/* ─── Pager ─── */
+.pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: clamp(72px, 9vw, 120px);
+  border-top: 1px solid var(--line-strong);
+}
+
+.pagerLink {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 28px 0;
+  color: var(--ink-3);
+}
+
+.pagerNext {
+  align-items: flex-end;
+  text-align: right;
+  border-left: 1px solid var(--line);
+}
+
+.pagerName {
+  font-size: clamp(1.4rem, 2.6vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  transition: color 0.3s var(--ease-out), transform 0.45s var(--ease-out);
+}
+
+.pagerLink:hover .pagerName {
+  color: var(--accent-ink);
+  transform: translateX(-6px);
+}
+
+.pagerNext:hover .pagerName {
+  transform: translateX(6px);
+}
+
+@media (max-width: 960px) {
+  .title,
+  .summary,
+  .links {
+    grid-column: 1 / -1;
+  }
+
+  .links {
+    justify-self: start;
+  }
+
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .shotCol {
+    position: static;
+  }
+
+  .scroller {
+    height: 60svh;
+  }
+}
+
+@media (max-width: 560px) {
+  .pager {
+    grid-template-columns: 1fr;
+  }
+
+  .pagerNext {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+}

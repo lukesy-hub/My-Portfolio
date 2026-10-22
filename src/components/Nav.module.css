@@ -1,12 +1,3 @@
-.progress {
-  position: fixed;
-  inset: 0 0 auto 0;
-  height: 2px;
-  z-index: 70;
-  transform-origin: 0 50%;
-  background: linear-gradient(90deg, var(--chroma-b), var(--accent) 60%, var(--chroma-c));
-}
-
 .header {
   position: fixed;
   inset: 0 0 auto 0;
@@ -101,7 +92,7 @@
   display: inline-flex;
   align-items: center;
   height: 36px;
-  padding: 0 16px;
+  padding: 0 14px;
   border-radius: 999px;
   font-size: 14px;
   font-weight: 500;
@@ -233,7 +224,7 @@
   padding: 8px 0;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1080px) {
   .header {
     grid-template-columns: 1fr auto;
   }

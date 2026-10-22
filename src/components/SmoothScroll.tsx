@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { scrollToId, setLenis } from "@/lib/scroll";
+import { getLenis, scrollToId, setLenis } from "@/lib/scroll";
 
 /**
  * Lenis smoothing driven by GSAP's ticker so ScrollTrigger and Lenis share one
@@ -11,6 +12,8 @@ import { scrollToId, setLenis } from "@/lib/scroll";
  * In-page anchor clicks are routed through `scrollToId` to respect the nav offset.
  */
 export function SmoothScroll() {
+  const pathname = usePathname();
+
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     let lenis: Lenis | null = null;
@@ -47,12 +50,6 @@ export function SmoothScroll() {
     };
     document.addEventListener("click", onClick);
 
-    // Honour a hash in the URL on first load, after layout settles.
-    if (location.hash.length > 1) {
-      const id = decodeURIComponent(location.hash.slice(1));
-      requestAnimationFrame(() => setTimeout(() => scrollToId(id), 120));
-    }
-
     // Recompute trigger positions once fonts and images change layout.
     const refresh = () => ScrollTrigger.refresh();
     document.fonts?.ready.then(refresh);
@@ -65,6 +62,16 @@ export function SmoothScroll() {
       stop();
     };
   }, []);
+
+  // On every route change: start at the top (or the hash target) and re-measure triggers.
+  useEffect(() => {
+    getLenis()?.scrollTo(0, { immediate: true, force: true });
+    const frame = requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+      if (location.hash.length > 1) scrollToId(decodeURIComponent(location.hash.slice(1)));
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [pathname]);
 
   return null;
 }

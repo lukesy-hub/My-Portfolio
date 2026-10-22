@@ -1,5 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
+import { Footer } from "@/components/Footer";
+import { Nav } from "@/components/Nav";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { profile, socials } from "@/data/profile";
 import "./globals.css";
 
@@ -29,7 +33,7 @@ const description =
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
-  title,
+  title: { default: title, template: `%s — ${profile.name}` },
   description,
   applicationName: `${profile.name} — Portfolio`,
   authors: [{ name: profile.name, url: profile.siteUrl }],
@@ -101,7 +105,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
+        <SmoothScroll />
+        <ScrollProgress />
+        <Nav />
+        <main id="main">{children}</main>
+        <Footer />
+        <div className="grain" aria-hidden="true" />
+      </body>
     </html>
   );
 }

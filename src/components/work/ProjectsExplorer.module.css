@@ -1,30 +1,120 @@
-.index {
-  margin-top: clamp(96px, 12vw, 160px);
+.explorer {
+  position: relative;
 }
 
+/* Sticky glass control bar that docks under the floating nav. */
 .toolbar {
+  position: sticky;
+  top: calc(var(--nav-h) + 10px);
+  z-index: 20;
   display: flex;
   flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
-  gap: 20px;
-  padding-bottom: 20px;
-  margin-bottom: clamp(28px, 4vw, 48px);
-  border-bottom: 1px solid var(--line);
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 22px;
 }
 
-.heading {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 1;
+.toolbar > * {
+  position: relative;
+  z-index: 1;
 }
 
-.heading :global(.mono) {
-  font-size: 13px;
+.search {
+  flex: 1 1 220px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
   color: var(--ink-3);
-  vertical-align: super;
-  letter-spacing: 0;
+  transition: border-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.search:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  border: 0;
+  background: none;
+  font-size: 15px;
+  color: var(--ink);
+  outline: none;
+}
+
+.search input::placeholder {
+  color: var(--ink-3);
+}
+
+.views {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+
+.viewBtn {
+  position: relative;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.viewBtn[aria-checked="true"] {
+  color: var(--bg);
+}
+
+.viewBg {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--accent);
+}
+
+:global([data-theme="dark"]) .viewBtn[aria-checked="true"] {
+  color: var(--accent-contrast);
+}
+
+.viewText {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.count {
+  margin: 22px 0 clamp(28px, 4vw, 44px);
+  color: var(--ink-3);
+}
+
+/* On phones the bar wraps to three rows — too tall to pin over the content. */
+@media (max-width: 760px) {
+  .toolbar {
+    position: relative;
+    top: auto;
+  }
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 64px 0;
+  border-top: 1px solid var(--line);
+  font-size: 1.25rem;
 }
 
 .filters {

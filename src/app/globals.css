@@ -84,6 +84,17 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: calc(var(--nav-h) + 24px);
+  /* The native scrollbar is hidden visually; scrolling itself is untouched.
+     The fixed progress bar at the top takes over its visual role. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 html:not(.lenis) {
@@ -170,6 +181,17 @@ html.theme-transition *::after {
   mix-blend-mode: normal;
 }
 
+/* ─── Page transition (see app/template.tsx) ───────────────── */
+.page-enter {
+  animation: page-enter 0.7s var(--ease-out) backwards;
+}
+
+@keyframes page-enter {
+  from {
+    transform: translateY(18px);
+  }
+}
+
 /* ─── Layout primitives ────────────────────────────────────── */
 .container {
   width: 100%;
@@ -181,6 +203,12 @@ html.theme-transition *::after {
 .section {
   position: relative;
   padding-block: clamp(96px, 14vw, 180px);
+}
+
+/* First section of an inner page clears the fixed nav. */
+.page-top.section,
+.page-top > .section:first-child {
+  padding-top: calc(var(--nav-h) + clamp(56px, 8vw, 112px));
 }
 
 .skip-link {
@@ -259,6 +287,18 @@ html.theme-transition *::after {
   font-style: italic;
   font-weight: 400;
   letter-spacing: -0.02em;
+}
+
+.h-page {
+  font-size: clamp(3rem, 8vw, 7.5rem);
+  animation: page-rise 1s var(--ease-out) both;
+}
+
+/* Transform-only, so the heading is painted from the first frame (good for LCP). */
+@keyframes page-rise {
+  from {
+    transform: translateY(0.3em);
+  }
 }
 
 .lede {
@@ -500,6 +540,58 @@ html.theme-transition *::after {
   50% { clip-path: inset(45% 0 30% 0); transform: translate(2px, 0); }
   75% { clip-path: inset(15% 0 70% 0); transform: translate(-3px, 0); }
   100% { clip-path: inset(50% 0 50% 0); transform: none; opacity: 0; }
+}
+
+/* ─── 404 (global: the root not-found boundary's CSS would otherwise be preloaded on every page) ─── */
+.nf-wrap {
+  min-height: 80svh;
+  display: flex;
+  align-items: center;
+}
+
+.nf-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+.nf-code {
+  color: var(--accent-ink);
+}
+
+.nf-title {
+  font-size: clamp(2.8rem, 8vw, 7rem);
+  font-weight: 650;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+  max-width: 14ch;
+}
+
+.nf-title em {
+  font-weight: 350;
+  letter-spacing: -0.03em;
+}
+
+.nf-term {
+  padding: 16px 20px;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.nf-term span {
+  color: var(--accent-ink);
+}
+
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 /* ─── Reduced motion ───────────────────────────────────────── */

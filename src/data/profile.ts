@@ -51,10 +51,18 @@ export const socials: SocialLink[] = [
 ];
 
 export const navLinks = [
-  { id: "top", label: "Home" },
-  { id: "work", label: "Work" },
-  { id: "about", label: "About" },
-  { id: "experience", label: "Experience" },
-  { id: "skills", label: "Skills" },
-  { id: "contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" },
+  { href: "/experience", label: "Experience" },
+  { href: "/skills", label: "Skills" },
+  { href: "/contact", label: "Contact" },
 ] as const;
+
+export const portrait = {
+  // File name is case-sensitive on Vercel — keep it exactly as in /public.
+  src: "/Personal-Pic.jpeg",
+  width: 1023,
+  height: 1537,
+  alt: "Portrait of Muhammad Talha in a blue suit, standing outdoors",
+};

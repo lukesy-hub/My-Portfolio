@@ -1,0 +1,9 @@
+.work {
+  padding-bottom: clamp(80px, 10vw, 140px);
+}
+
+.workFoot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: clamp(32px, 4vw, 56px);
+}

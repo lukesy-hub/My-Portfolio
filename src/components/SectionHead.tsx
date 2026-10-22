@@ -9,10 +9,13 @@ type Props = {
   id: string;
   children: React.ReactNode;
   aside?: React.ReactNode;
+  /** 1 for a page's main heading, 2 for sections within a page. */
+  level?: 1 | 2;
 };
 
 /** Swiss section header: numbered index column + headline, with a one-shot glitch on the label. */
-export function SectionHead({ index, label, id, children, aside }: Props) {
+export function SectionHead({ index, label, id, children, aside, level = 2 }: Props) {
+  const Heading = level === 1 ? "h1" : "h2";
   return (
     <header className="section-head">
       <div className="section-head__index mono">
@@ -20,11 +23,18 @@ export function SectionHead({ index, label, id, children, aside }: Props) {
         <GlitchLabel text={label} />
       </div>
       <div className="section-head__title">
-        <Reveal>
-          <h2 id={id} className="h-section">
+        {level === 1 ? (
+          // Page headings animate with CSS so they paint (and count for LCP) before hydration.
+          <Heading id={id} className="h-section h-page">
             {children}
-          </h2>
-        </Reveal>
+          </Heading>
+        ) : (
+          <Reveal>
+            <Heading id={id} className="h-section">
+              {children}
+            </Heading>
+          </Reveal>
+        )}
         {aside && (
           <Reveal delay={0.1}>
             <div className="lede" style={{ marginTop: 24 }}>
