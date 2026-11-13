@@ -3,16 +3,9 @@
 import { skillGroups } from "@/data/skills";
 import { Reveal } from "./Reveal";
 import { SectionHead } from "./SectionHead";
+import { SkillSphere } from "./SkillSphere";
+import { TiltGroup } from "./TiltGroup";
 import styles from "./Skills.module.css";
-
-// Pointer spotlight: one listener on the grid writes the cursor position to the hovered card.
-function onPointerMove(event: React.PointerEvent<HTMLDivElement>) {
-  const card = (event.target as HTMLElement).closest<HTMLElement>("[data-card]");
-  if (!card) return;
-  const rect = card.getBoundingClientRect();
-  card.style.setProperty("--mx", `${event.clientX - rect.left}px`);
-  card.style.setProperty("--my", `${event.clientY - rect.top}px`);
-}
 
 export function Skills({ level = 2 }: { level?: 1 | 2 }) {
   return (
@@ -28,9 +21,12 @@ export function Skills({ level = 2 }: { level?: 1 | 2 }) {
           One stack, <em>front to back</em>.
         </SectionHead>
 
-        <div className={styles.bento} onPointerMove={onPointerMove}>
+        {level === 1 && <SkillSphere />}
+
+        {/* Each card leans toward the pointer (TiltGroup) with a spotlight following it. */}
+        <TiltGroup className={styles.bento} max={5}>
           {/* Frontend — the largest card: type specimen + real-looking component code. */}
-          <Reveal className={`${styles.card} ${styles.frontend}`} data-card>
+          <Reveal className={`${styles.card} ${styles.frontend}`} data-card data-tilt>
             <CardHead index="A" title="Frontend" />
             <ul className={styles.specimen}>
               {skillGroups.frontend.map((s) => (
@@ -50,7 +46,7 @@ export function Skills({ level = 2 }: { level?: 1 | 2 }) {
           </Reveal>
 
           {/* Motion — an easing curve that draws itself, with a ball riding it. */}
-          <Reveal className={`${styles.card} ${styles.motion}`} delay={0.05} data-card>
+          <Reveal className={`${styles.card} ${styles.motion}`} delay={0.05} data-card data-tilt>
             <CardHead index="B" title="Motion & creative dev" />
             <div className={styles.curveWrap} aria-hidden="true">
               <svg viewBox="0 0 200 120" className={styles.curve}>
@@ -74,7 +70,7 @@ export function Skills({ level = 2 }: { level?: 1 | 2 }) {
           </Reveal>
 
           {/* AI & automation — a workflow graph in the style of n8n. */}
-          <Reveal className={`${styles.card} ${styles.ai}`} delay={0.05} data-card>
+          <Reveal className={`${styles.card} ${styles.ai}`} delay={0.05} data-card data-tilt>
             <CardHead index="C" title="AI & automation" />
             <svg viewBox="0 0 320 120" className={styles.flow} role="img" aria-label="Example automation: webhook to LLM to CRM and messaging">
               <path d="M66 60 H 120 M 196 60 C 220 60, 224 30, 250 30 M 196 60 C 220 60, 224 90, 250 90" className={styles.flowLine} />
@@ -95,7 +91,7 @@ export function Skills({ level = 2 }: { level?: 1 | 2 }) {
             <TagList items={skillGroups.ai} />
           </Reveal>
 
-          <Reveal className={`${styles.card} ${styles.backend}`} delay={0.1} data-card>
+          <Reveal className={`${styles.card} ${styles.backend}`} delay={0.1} data-card data-tilt>
             <CardHead index="D" title="Backend & data" />
             <div className={styles.twoCol}>
               <ul className={styles.monoList}>
@@ -111,7 +107,7 @@ export function Skills({ level = 2 }: { level?: 1 | 2 }) {
             </div>
           </Reveal>
 
-          <Reveal className={`${styles.card} ${styles.mobile}`} delay={0.15} data-card>
+          <Reveal className={`${styles.card} ${styles.mobile}`} delay={0.15} data-card data-tilt>
             <CardHead index="E" title="Mobile" />
             <div className={styles.phoneGlyph} aria-hidden="true">
               <span />
@@ -120,7 +116,7 @@ export function Skills({ level = 2 }: { level?: 1 | 2 }) {
           </Reveal>
 
           {/* Design language — each style typeset in itself. */}
-          <Reveal className={`${styles.card} ${styles.design}`} data-card>
+          <Reveal className={`${styles.card} ${styles.design}`} data-card data-tilt>
             <CardHead index="F" title="Design language" />
             <ul className={styles.styles}>
               <li className={styles.sSwiss}>Swiss</li>
@@ -142,7 +138,7 @@ export function Skills({ level = 2 }: { level?: 1 | 2 }) {
             </ul>
           </Reveal>
 
-          <Reveal className={`${styles.card} ${styles.tools}`} delay={0.05} data-card>
+          <Reveal className={`${styles.card} ${styles.tools}`} delay={0.05} data-card data-tilt>
             <CardHead index="G" title="Tools & workflow" />
             <ol className={styles.gitlog}>
               {skillGroups.tools.map((t, i) => (
@@ -153,7 +149,7 @@ export function Skills({ level = 2 }: { level?: 1 | 2 }) {
             </ol>
           </Reveal>
 
-          <Reveal className={`${styles.card} ${styles.perf}`} delay={0.1} data-card>
+          <Reveal className={`${styles.card} ${styles.perf}`} delay={0.1} data-card data-tilt>
             <CardHead index="H" title="Performance & SEO" />
             <ul className={styles.checks}>
               {skillGroups.performance.map((p) => (
@@ -161,7 +157,7 @@ export function Skills({ level = 2 }: { level?: 1 | 2 }) {
               ))}
             </ul>
           </Reveal>
-        </div>
+        </TiltGroup>
       </div>
     </section>
   );

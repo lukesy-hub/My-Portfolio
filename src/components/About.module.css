@@ -39,10 +39,52 @@
 }
 
 .approachItem {
-  padding-top: 18px;
-  border-top: 1px solid var(--line-strong);
+  perspective: 800px;
   color: var(--ink-2);
   font-size: 15px;
+}
+
+/* A thin slab that leans toward the pointer; the ghost numeral floats above it. */
+.approachCard {
+  --mx: 50%;
+  --my: 0%;
+  position: relative;
+  height: 100%;
+  padding: 22px 20px 24px;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(240px circle at var(--mx) var(--my), color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%),
+    linear-gradient(160deg, var(--surface), var(--bg-2));
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.5) inset, 0 18px 40px -28px rgb(0 0 0 / 0.45);
+  transform-style: preserve-3d;
+}
+
+.approachCard:global(.is-tilting) {
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.5) inset, 0 34px 60px -30px rgb(0 0 0 / 0.55);
+}
+
+.approachCard > * {
+  position: relative;
+}
+
+.approachGhost {
+  position: absolute !important;
+  top: -18px;
+  right: 14px;
+  font-size: 5.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--accent) 55%, transparent);
+  transform: translateZ(46px);
+  pointer-events: none;
+}
+
+.approachCard p,
+.approachTitle {
+  transform: translateZ(18px);
 }
 
 .approachNum {
@@ -70,13 +112,123 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  perspective: 1200px;
+}
+
+/* ─── Portrait in orbit: a CSS 3D ring of words circling the photo ─── */
+.orbit {
+  --r: clamp(130px, 13vw, 175px);
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 26px 0 30px;
+  perspective: 1000px;
+}
+
+.orbitScene {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  transform-style: preserve-3d;
+}
+
+.orbitPlane {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(-14deg) rotateZ(-9deg);
+}
+
+.orbitLine {
+  position: absolute;
+  left: calc(var(--r) * -1);
+  top: calc(var(--r) * -1);
+  width: calc(var(--r) * 2);
+  height: calc(var(--r) * 2);
+  border-radius: 50%;
+  border: 1px dashed color-mix(in srgb, var(--accent) 55%, transparent);
+  transform: rotateX(90deg);
+}
+
+.orbitRing {
+  position: absolute;
+  transform-style: preserve-3d;
+  animation: orbit-spin 26s linear infinite;
+}
+
+/* Zero-size anchor placed on the ring; the pill is centred on it in 2D. */
+.orbitWord {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  transform: rotateY(var(--a)) translateZ(var(--r));
+  backface-visibility: hidden;
+}
+
+.orbitWord > span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  color: var(--ink);
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+
+.orbitWord:nth-child(3n + 1) > span {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-contrast);
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotateY(-360deg);
+  }
+}
+
+.orbit:hover .orbitRing {
+  animation-play-state: paused;
 }
 
 .portrait {
+  --mx: 50%;
+  --my: 30%;
+  position: relative;
   width: 62%;
   border-radius: 999px 999px 8px 8px;
   overflow: hidden;
-  box-shadow: inset 0 0 0 1px var(--line);
+  box-shadow: inset 0 0 0 1px var(--line), 0 40px 60px -30px rgb(0 0 0 / 0.5);
+}
+
+.orbitScene:global(.is-tilting) .portrait {
+  --mx: inherit;
+  --my: inherit;
+}
+
+.portraitGlare {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(220px circle at var(--mx) var(--my), rgb(255 255 255 / 0.28), transparent 65%);
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out);
+  pointer-events: none;
+}
+
+.orbitScene:global(.is-tilting) .portraitGlare {
+  opacity: 1;
 }
 
 .portrait img {
@@ -169,5 +321,9 @@
 
   .portrait {
     width: 50%;
+  }
+
+  .orbit {
+    --r: clamp(120px, 36vw, 190px);
   }
 }

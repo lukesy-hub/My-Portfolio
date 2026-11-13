@@ -2,6 +2,11 @@
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: clamp(10px, 1.2vw, 16px);
+  perspective: 2200px;
+}
+
+.card:global(.is-tilting) {
+  box-shadow: 0 30px 60px -34px rgb(0 0 0 / 0.5);
 }
 
 .card {

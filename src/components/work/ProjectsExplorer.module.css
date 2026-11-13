@@ -166,28 +166,20 @@
 /* ─── Grid ─── */
 .grid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(40px, 5vw, 72px) clamp(16px, 2vw, 28px);
-  align-items: start;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(36px, 4vw, 56px) clamp(16px, 2vw, 28px);
+  align-items: stretch;
 }
 
 .cell {
-  grid-column: span var(--span);
-}
-
-/* Offset some cells off the baseline for an asymmetric, magazine-like rhythm. */
-.cell[data-shape="square"]:nth-child(7n + 4) {
-  margin-top: clamp(24px, 5vw, 80px);
-}
-
-.cell[data-shape="tall"] {
-  margin-top: clamp(0px, 3vw, 48px);
+  min-width: 0;
 }
 
 .card {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: 100%;
 }
 
 /* ─── Media ─── */
@@ -207,14 +199,9 @@
   background: color-mix(in srgb, var(--tint) 16%, var(--bg-2));
 }
 
-.cell[data-shape="square"] .media {
-  aspect-ratio: 4 / 3.4;
-  display: flex;
-  align-items: center;
-}
-
-.cell[data-shape="wide"] .media {
-  aspect-ratio: 16 / 11;
+/* Every card shares one shape so rows line up cleanly. */
+.media {
+  aspect-ratio: 4 / 3;
   display: flex;
   align-items: center;
 }
@@ -240,39 +227,6 @@
   aspect-ratio: 16 / 10;
   object-fit: cover;
   object-position: top;
-}
-
-/* Tall cards: a layered browser + phone composition. */
-.tallStage {
-  position: relative;
-  display: block;
-  aspect-ratio: 4 / 5;
-}
-
-.tallBrowser {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 88%;
-  transition: transform 0.9s var(--ease-out);
-}
-
-.tallPhone {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 42%;
-  padding: 5px;
-  border-radius: 22px;
-  background: #0e0e0d;
-  box-shadow: 0 30px 50px -20px rgb(0 0 0 / 0.55);
-  transition: transform 0.9s var(--ease-out);
-}
-
-.tallPhone img {
-  width: 100%;
-  height: auto;
-  border-radius: 17px;
 }
 
 /* ─── Hover / focus reveal ─── */
@@ -313,13 +267,8 @@
     transform: translateY(0);
   }
 
-  .media:hover .browser,
-  .media:hover .tallBrowser {
+  .media:hover .browser {
     transform: translateY(-6px) scale(1.015);
-  }
-
-  .media:hover .tallPhone {
-    transform: translate(-6px, -10px) rotate(-2deg);
   }
 }
 
@@ -382,43 +331,15 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 1100px) {
-  .cell {
-    grid-column: span 6;
-  }
-
-  .cell[data-shape="square"]:nth-child(7n + 4) {
-    margin-top: 0;
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 760px) {
   .grid {
     grid-template-columns: 1fr;
-    row-gap: 48px;
-  }
-
-  .cell {
-    grid-column: 1 / -1;
-  }
-
-  .cell[data-shape="tall"] {
-    margin-top: 0;
-  }
-
-  .cell[data-shape] .media {
-    aspect-ratio: auto;
-  }
-
-  .tallStage {
-    aspect-ratio: 5 / 4.4;
-  }
-
-  .tallBrowser {
-    width: 84%;
-  }
-
-  .tallPhone {
-    width: 34%;
+    row-gap: 44px;
   }
 
   .filters {

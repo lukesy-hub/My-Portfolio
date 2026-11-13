@@ -3,7 +3,11 @@ import { Link } from "@/components/IntentLink";
 import { education } from "@/data/experience";
 import { portrait, profile } from "@/data/profile";
 import { Reveal } from "./Reveal";
+import { TiltGroup } from "./TiltGroup";
 import styles from "./About.module.css";
+
+// Words that orbit the portrait — a CSS 3D ring, no WebGL needed.
+const orbitWords = ["React", "Next.js", "n8n", "Flutter", "Node.js", "GSAP", "OpenAI", "Three.js", "TypeScript", "Make.com", "Python", "Lenis"];
 
 const approach = [
   {
@@ -23,7 +27,7 @@ const approach = [
 /** /about: background, approach and an at-a-glance spec sheet. */
 export function About() {
   return (
-    <div className={`container ${styles.grid}`}>
+    <TiltGroup className={`container ${styles.grid}`}>
       <div className={styles.main}>
         <Reveal>
           <p className={styles.lead}>
@@ -50,9 +54,14 @@ export function About() {
         <ol className={styles.approach}>
           {approach.map((item, i) => (
             <Reveal as="li" key={item.title} delay={i * 0.08} className={styles.approachItem}>
-              <span className={`${styles.approachNum} mono`}>{String(i + 1).padStart(2, "0")}</span>
-              <h3 className={styles.approachTitle}>{item.title}</h3>
-              <p>{item.body}</p>
+              <div className={styles.approachCard} data-tilt="12">
+                <span className={styles.approachGhost} aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className={`${styles.approachNum} mono`}>{String(i + 1).padStart(2, "0")}</span>
+                <h3 className={styles.approachTitle}>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
             </Reveal>
           ))}
         </ol>
@@ -68,10 +77,29 @@ export function About() {
       </div>
 
       <aside className={styles.spec} aria-label="Profile at a glance">
-        <div className={styles.portrait}>
-          <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="(max-width: 860px) 60vw, 300px" />
+        <div className={styles.orbit}>
+          <div className={styles.orbitScene} data-tilt="14">
+            <div className={styles.orbitPlane} aria-hidden="true">
+              <span className={styles.orbitLine} />
+              <div className={styles.orbitRing}>
+                {orbitWords.map((word, i) => (
+                  <span
+                    key={word}
+                    className={styles.orbitWord}
+                    style={{ "--a": `${(360 / orbitWords.length) * i}deg` } as React.CSSProperties}
+                  >
+                    <span className="mono">{word}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className={styles.portrait}>
+              <Image src={portrait.src} alt={portrait.alt} width={portrait.width} height={portrait.height} sizes="(max-width: 860px) 60vw, 300px" />
+              <span className={styles.portraitGlare} aria-hidden="true" />
+            </div>
+          </div>
         </div>
-        <div className={`${styles.specPanel} reeded`}>
+        <div className={`${styles.specPanel} reeded`} data-tilt="6">
           <p className={`${styles.specHead} mono`}>Spec sheet</p>
           <dl>
             <div>
@@ -104,6 +132,6 @@ export function About() {
         </div>
         <p className={`${styles.quote} serif italic`}>“Great software is invisible — it makes complex tasks feel effortless.”</p>
       </aside>
-    </div>
+    </TiltGroup>
   );
 }

@@ -1,0 +1,200 @@
+.band {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+  margin-bottom: clamp(48px, 7vw, 96px);
+  padding: clamp(24px, 3vw, 44px);
+  border-radius: var(--radius-l);
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(60% 80% at 80% 50%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%),
+    var(--surface);
+  overflow: hidden;
+}
+
+/* Family colours (dot + word tint). */
+.band [data-family="build"] {
+  --fam: var(--ink);
+}
+.band [data-family="motion"] {
+  --fam: var(--accent);
+}
+.band [data-family="ai"] {
+  --fam: var(--chroma-c);
+}
+.band [data-family="systems"] {
+  --fam: var(--chroma-b);
+}
+
+.kicker {
+  color: var(--accent-ink);
+}
+
+.title {
+  margin: 14px 0 16px;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-weight: 600;
+}
+
+.title em {
+  font-weight: 350;
+  color: var(--accent-ink);
+}
+
+.lede {
+  max-width: 38ch;
+  color: var(--ink-2);
+}
+
+.legend {
+  display: grid;
+  gap: 2px;
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+}
+
+.legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--fam);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--fam) 18%, transparent);
+}
+
+.legend .mono {
+  margin-left: auto;
+  color: var(--ink-3);
+}
+
+/* ─── The globe ─── */
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+  aspect-ratio: 1;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+}
+
+.stage:active {
+  cursor: grabbing;
+}
+
+.core {
+  position: absolute;
+  inset: 22%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--accent) 45%, transparent), transparent 55%),
+    radial-gradient(circle at 70% 75%, color-mix(in srgb, var(--chroma-c) 35%, transparent), transparent 60%);
+  filter: blur(26px);
+  opacity: 0.7;
+  animation: core-breathe 6s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes core-breathe {
+  to {
+    transform: scale(1.12) rotate(40deg);
+    opacity: 0.95;
+  }
+}
+
+.equator {
+  position: absolute;
+  inset: 9%;
+  border-radius: 50%;
+  border: 1px dashed var(--line-strong);
+}
+
+.e1 {
+  transform: rotateX(72deg);
+  animation: equator-tilt 18s linear infinite;
+}
+
+.e2 {
+  transform: rotateY(72deg);
+  border-style: solid;
+  border-color: var(--line);
+  animation: equator-tilt-2 24s linear infinite;
+}
+
+@keyframes equator-tilt {
+  from {
+    transform: perspective(900px) rotateX(72deg) rotateZ(0deg);
+  }
+  to {
+    transform: perspective(900px) rotateX(72deg) rotateZ(360deg);
+  }
+}
+
+@keyframes equator-tilt-2 {
+  from {
+    transform: perspective(900px) rotateY(72deg) rotateZ(0deg);
+  }
+  to {
+    transform: perspective(900px) rotateY(72deg) rotateZ(-360deg);
+  }
+}
+
+.words {
+  position: absolute;
+  inset: 0;
+}
+
+.word {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px 5px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--fam) 35%, var(--line));
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: blur(6px);
+  font-size: 13.5px;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+.word::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--fam);
+}
+
+.word:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+@media (max-width: 860px) {
+  .band {
+    grid-template-columns: 1fr;
+  }
+
+  .word {
+    font-size: 12px;
+  }
+}

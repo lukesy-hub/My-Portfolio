@@ -229,6 +229,7 @@ export const projects: Project[] = [
     slug: "thermoking",
     name: "Thermoking Repair LLC",
     url: "https://thermoking-repair.vercel.app/",
+    altLinks: [{ label: "3D edition", url: "https://thermoking.syncognix.tech/" }],
     category: "Automotive",
     sector: "Truck & trailer repair",
     summary:
@@ -265,7 +266,8 @@ export const projects: Project[] = [
   {
     slug: "novious",
     name: "Novious Global",
-    url: "https://novious-global.vercel.app/",
+    url: "https://noviousglobal.com/",
+    altLinks: [{ label: "Preview build", url: "https://novious-global.vercel.app/" }],
     category: "Services",
     sector: "Sourcing & procurement",
     location: "Shanghai, China",
@@ -285,7 +287,7 @@ export const projects: Project[] = [
   {
     slug: "pawfect",
     name: "Pawfect by FurFresh",
-    url: "https://demo.ingeniousc.com/pawfect-furfresh-2/",
+    url: "https://www.pawfect-furfresh.com/",
     category: "Commerce",
     sector: "Pet care",
     summary:
@@ -319,6 +321,203 @@ export const projects: Project[] = [
     longHeight: 2213,
   },
   {
+    slug: "ingenious-concepts",
+    name: "Ingenious Concepts",
+    url: "https://ingeniousc.com/",
+    category: "Services",
+    sector: "AI-powered digital agency",
+    location: "Lahore · Dallas · Sydney",
+    summary:
+      "The agency’s own site — AI-first marketing, automation, development and design, told through an illustrated “every big brand starts as one idea” story.",
+    highlights: [
+      "Hand-illustrated hero scene with an Idea → Web → Apps → Ads → Launch journey",
+      "Looping service marquee across marketing, automation, e-commerce, XR and security",
+      "Case studies, careers, blog and a free-proposal funnel",
+    ],
+    tech: ["Vite", "Lenis"],
+    context: "Ingenious Concepts",
+    tint: "#F2B21B",
+    media: { mobile: true, long: true },
+    longHeight: 3200,
+  },
+  {
+    slug: "teleclaris",
+    name: "TeleClaris",
+    url: "https://teleclaris.syncognix.tech/",
+    category: "Services",
+    sector: "Medical billing & healthcare IT",
+    summary:
+      "Medical billing and revenue-cycle management, HIPAA-compliant healthcare IT, medical recruitment and practice real estate — one partner for the business side of a practice.",
+    highlights: [
+      "“Revenue clarity that powers your practice.” hero with a tracked claim-lifecycle panel",
+      "Verify → Code → Submit → Follow up: one accountable process, intake to payment",
+      "Four disciplines and a free billing-audit call to action",
+    ],
+    tech: ["React", "Vite", "GSAP", "Lenis"],
+    tint: "#19B39A",
+    media: { mobile: true, long: true },
+    longHeight: 3200,
+  },
+  {
+    slug: "covelynt",
+    name: "Covelynt",
+    url: "https://covelynt.syncognix.tech/",
+    category: "Services",
+    sector: "Sales development",
+    summary:
+      "Sales-development programs that connect research, outreach, qualification and sales operations into one pipeline — “From market to meeting.”",
+    highlights: [
+      "Six-stage pipeline told on scroll: define, research, engage, qualify, hand off, improve",
+      "Target → Engage → Optimize capability layers as an interactive index",
+      "Editorial type over a cinematic city backdrop",
+    ],
+    tech: ["React", "Vite", "Three.js", "Lenis"],
+    tint: "#23A6B5",
+    media: { mobile: true, long: true },
+    longHeight: 3200,
+  },
+  {
+    slug: "truckify",
+    name: "Truckify",
+    url: "https://truckify.syncognix.tech/",
+    category: "Automotive",
+    sector: "Truck dispatching",
+    summary:
+      "A dispatch partner for owner-operators and small fleets — load sourcing, rate negotiation, broker communication and back-office paperwork, handled.",
+    highlights: [
+      "“You run the road. We run the board.” hero with a live dispatch-desk clock",
+      "Sample load card moving from sourced to delivered",
+      "Equipment, lanes and a five-step path from first call to a full schedule",
+    ],
+    tech: ["React", "Vite", "Three.js", "Lenis"],
+    tint: "#F26A1B",
+    media: { mobile: true, long: true },
+    longHeight: 3200,
+  },
+  {
+    slug: "safa",
+    name: "Saffa Online Quran Academy",
+    url: "https://safa.syncognix.tech/",
+    category: "Services",
+    sector: "Online Quran education",
+    summary:
+      "A calm, welcoming academy site for online Quran reading, Qaida, Tajweed and Islamic Studies — personal, one-to-one learning paths for children and adults.",
+    highlights: [
+      "Serif “Let the words of the Quran find their way home.” hero with arched imagery",
+      "Learning-path cards from Noorani Qaida to Tajweed practice",
+      "Step-by-step visual journey and free-trial booking",
+    ],
+    tech: ["React", "Vite", "GSAP", "Lenis"],
+    tint: "#2E6B4A",
+    media: { mobile: true, long: true },
+    longHeight: 3200,
+  },
+  {
+    slug: "vellumor",
+    name: "VELLUMOR",
+    url: "https://vellumor.ayiin.com/",
+    category: "Commerce",
+    sector: "Leather goods",
+    summary:
+      "Storefront for handcrafted leather bags, wallets, belts and jackets — “Leather that remembers.” — built around a launch edit and six collections.",
+    highlights: [
+      "Dark, tactile hero with italic serif typography",
+      "Launch edit with SKU-coded product cards and add-to-bag",
+      "Six collections, from everyday essentials to specialist and bespoke work",
+    ],
+    tech: ["React", "Vite"],
+    tint: "#8A4B2A",
+    media: { mobile: true, long: false },
+  },
+  {
+    slug: "london-cd",
+    name: "London Construction & Development",
+    url: "https://www.londonsconstructions.co.uk/",
+    category: "Services",
+    sector: "Construction & refurbishment",
+    location: "Ashford, UK",
+    summary:
+      "Residential and commercial construction, refurbishment, extensions and conversions — a confident, architectural site for a full-service builder.",
+    highlights: [
+      "“Building spaces that endure.” hero over full-bleed architectural photography",
+      "Build / Transform / Maintain model and four principal project types",
+      "Filterable services index with a light and dark theme",
+    ],
+    tech: ["Astro"],
+    tint: "#B8925A",
+    media: { mobile: true, long: false },
+  },
+  {
+    slug: "marson-maynor",
+    name: "Marson Maynor",
+    url: "https://marson-maynor.vercel.app/",
+    category: "Services",
+    sector: "Mortgage advisory",
+    summary:
+      "A mortgage advisor’s site for homebuyers, homeowners and investors — home equity and HELOCs, investor financing and purchase financing in plain language.",
+    highlights: [
+      "Three financing pathways: start with the decision in front of you",
+      "Dedicated home-equity, investor and home-purchase stories",
+      "Strategy sessions and direct call actions throughout",
+    ],
+    tech: ["React", "Vite"],
+    tint: "#A3202F",
+    media: { mobile: true, long: false },
+  },
+  {
+    slug: "mra-global",
+    name: "MRA Global Services",
+    url: "https://mraglobalservices.com/",
+    category: "Services",
+    sector: "Outbound sales & lead generation",
+    summary:
+      "Research, cold calling, qualification, appointment setting and quality operations in one connected sales engine for B2B and B2C teams.",
+    highlights: [
+      "“Turn targeted outreach into qualified conversations.” hero with a live campaign-workflow panel",
+      "Market → Meeting pipeline: research, engage, qualify, meet",
+      "Channel mix, QA monitoring and CRM-ready handoffs",
+    ],
+    tech: [],
+    tint: "#D9512C",
+    media: { mobile: true, long: false },
+  },
+  {
+    slug: "georgia-tire",
+    name: "TireXpress",
+    url: "https://www.georgiatirexpress.com/",
+    category: "Automotive",
+    sector: "Mobile truck & RV tire service",
+    location: "North Georgia & Metro Atlanta",
+    summary:
+      "24/7 mobile tire repair and replacement for semi trucks, commercial fleets, trailers and RVs — built to get a stranded driver on the phone fast.",
+    highlights: [
+      "“Georgia’s roadside tire experts. Ready 24/7.” hero with live availability status",
+      "Call and text actions above the fold",
+      "Truck, roadside and semi/RV service breakdown with tire sizes",
+    ],
+    tech: ["React", "Vite", "GSAP"],
+    tint: "#F05A1A",
+    media: { mobile: false, long: false },
+  },
+  {
+    slug: "corpus-christi-handyman",
+    name: "Corpus Christi Handyman Services",
+    url: "https://www.corpuschristihandymanservices.com/",
+    category: "Services",
+    sector: "Handyman & home repair",
+    location: "Corpus Christi, TX",
+    summary:
+      "Repairs, installs and finishing work for homes, rentals and small businesses — send the list once and get one clear plan for the work.",
+    highlights: [
+      "“Your home to-do list. Handled right.” video-backed hero",
+      "Start-with-the-problem service picker and recent-work gallery",
+      "Before/after comparison and bundled small-jobs messaging",
+    ],
+    tech: [],
+    tint: "#C49A5A",
+    media: { mobile: true, long: false },
+  },
+  {
     slug: "ims",
     name: "Inventory Management System",
     url: "https://inventory-management-system-r2rz.vercel.app/",
@@ -345,6 +544,11 @@ export const featuredProjects = featuredSlugs.map((slug) => projects.find((p) =>
 
 /** Other work from the CV that has no public link. */
 export const otherWork: { name: string; detail: string; tech: string[] }[] = [
+  {
+    name: "SxB People",
+    detail: "A complete HRM system — daily attendance, days-off management, task management and IP-based attendance.",
+    tech: ["HRM", "IP-based attendance", "Task management"],
+  },
   {
     name: "Election Campaign System",
     detail: "Campaign management platform — members, voter records, lawyers and operations with role-based access control.",

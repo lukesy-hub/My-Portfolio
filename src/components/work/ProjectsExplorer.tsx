@@ -12,18 +12,6 @@ import styles from "./ProjectsExplorer.module.css";
 type Filter = "All" | ProjectCategory;
 type View = "gallery" | "index";
 
-// Rows of 12 columns: wide + tall, three-up, tall + wide — an editorial rhythm
-// that survives filtering because it is applied to the filtered order.
-const rhythm: { span: number; shape: "wide" | "tall" | "square" }[] = [
-  { span: 7, shape: "wide" },
-  { span: 5, shape: "tall" },
-  { span: 4, shape: "square" },
-  { span: 4, shape: "square" },
-  { span: 4, shape: "square" },
-  { span: 5, shape: "tall" },
-  { span: 7, shape: "wide" },
-];
-
 const counts = Object.fromEntries(categories.map((c) => [c, projects.filter((p) => p.category === c).length]));
 
 const haystack = (p: Project) =>
@@ -111,25 +99,20 @@ export function ProjectsExplorer() {
       ) : view === "gallery" ? (
         <motion.ul layout className={styles.grid}>
           <AnimatePresence mode="popLayout" initial={false}>
-            {visible.map((project, i) => {
-              const slot = rhythm[i % rhythm.length];
-              const tall = slot.shape === "tall" && project.media.mobile;
-              return (
-                <motion.li
-                  layout
-                  key={project.slug}
-                  className={styles.cell}
-                  data-shape={tall ? "tall" : slot.shape === "tall" ? "wide" : slot.shape}
-                  style={{ "--span": slot.span, "--tint": project.tint } as React.CSSProperties}
-                  initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, scale: 0.96, filter: "blur(6px)" }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <ProjectCard project={project} number={projects.indexOf(project) + 1} tall={tall} />
-                </motion.li>
-              );
-            })}
+            {visible.map((project) => (
+              <motion.li
+                layout
+                key={project.slug}
+                className={styles.cell}
+                style={{ "--tint": project.tint } as React.CSSProperties}
+                initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 0.96, filter: "blur(6px)" }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <ProjectCard project={project} number={projects.indexOf(project) + 1} />
+              </motion.li>
+            ))}
           </AnimatePresence>
         </motion.ul>
       ) : (
@@ -154,38 +137,21 @@ function ViewIcon({ view }: { view: View }) {
   );
 }
 
-function ProjectCard({ project, number, tall }: { project: Project; number: number; tall: boolean }) {
+function ProjectCard({ project, number }: { project: Project; number: number }) {
   return (
     <article className={styles.card}>
       <Link href={`/projects/${project.slug}`} className={styles.media} aria-label={`Case study: ${project.name}`}>
         <span className={styles.tintWash} aria-hidden="true" />
-        {tall ? (
-          <span className={styles.tallStage}>
-            <BrowserFrame host={hostOf(project.url)} className={styles.tallBrowser}>
-              <Image src={`/work/${project.slug}.webp`} alt="" width={1440} height={900} sizes="(max-width: 760px) 70vw, 28vw" className={styles.img} />
-            </BrowserFrame>
-            <span className={styles.tallPhone}>
-              <Image
-                src={`/work/${project.slug}-mobile.webp`}
-                alt={`${project.name} mobile homepage`}
-                width={390}
-                height={844}
-                sizes="(max-width: 760px) 40vw, 16vw"
-              />
-            </span>
-          </span>
-        ) : (
-          <BrowserFrame host={hostOf(project.url)} className={styles.browser}>
-            <Image
-              src={`/work/${project.slug}.webp`}
-              alt={`${project.name} homepage`}
-              width={1440}
-              height={900}
-              sizes="(max-width: 760px) 92vw, (max-width: 1100px) 46vw, 40vw"
-              className={styles.img}
-            />
-          </BrowserFrame>
-        )}
+        <BrowserFrame host={hostOf(project.url)} className={styles.browser}>
+          <Image
+            src={`/work/${project.slug}.webp`}
+            alt={`${project.name} homepage`}
+            width={1440}
+            height={900}
+            sizes="(max-width: 760px) 92vw, (max-width: 1100px) 46vw, 30vw"
+            className={styles.img}
+          />
+        </BrowserFrame>
 
         {/* Hover/focus reveal: summary on a glass panel. Same info stays in the caption on touch. */}
         <span className={`${styles.reveal} glass`} aria-hidden="true">

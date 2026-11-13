@@ -121,10 +121,12 @@ export default async function CaseStudyPage({ params }: PageProps<"/projects/[sl
                   <dd>{project.location}</dd>
                 </div>
               )}
-              <div>
-                <dt className="mono">Built with</dt>
-                <dd>{project.tech.join(", ")}</dd>
-              </div>
+              {project.tech.length > 0 && (
+                <div>
+                  <dt className="mono">Built with</dt>
+                  <dd>{project.tech.join(", ")}</dd>
+                </div>
+              )}
               {project.context && (
                 <div>
                   <dt className="mono">Delivered at</dt>

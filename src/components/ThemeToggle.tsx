@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { useTheme, type Theme } from "@/lib/hooks";
+import { canInk, inkToggle, isInkRunning } from "@/lib/ink/inkTransition";
 import styles from "./ThemeToggle.module.css";
 
 function applyTheme(next: Theme) {
@@ -19,28 +20,24 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   const next: Theme = theme === "dark" ? "light" : "dark";
 
   const toggle = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isInkRunning()) return;
     const root = document.documentElement;
 
-    if (!document.startViewTransition || reduce) {
+    // No View Transitions / WebGL2, or reduced motion: a plain colour cross-fade.
+    if (!canInk()) {
       root.classList.add("theme-transition");
       applyTheme(next);
       window.setTimeout(() => root.classList.remove("theme-transition"), 520);
       return;
     }
 
-    // Circular reveal from the toggle — the new theme expands like light through a lens.
-    const { left, top, width, height } = event.currentTarget.getBoundingClientRect();
-    const x = left + width / 2;
-    const y = top + height / 2;
-    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-    const transition = document.startViewTransition(() => applyTheme(next));
-    transition.ready.then(() => {
-      root.animate(
-        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-        { duration: 650, easing: "cubic-bezier(0.65, 0, 0.35, 1)", pseudoElement: "::view-transition-new(root)" },
-      );
-    });
+    // Ink bleeds from where the click landed; keyboard activation (detail 0) uses the button.
+    const rect = event.currentTarget.getBoundingClientRect();
+    const point =
+      event.detail === 0
+        ? { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+        : { x: event.clientX, y: event.clientY };
+    void inkToggle(next, point, () => applyTheme(next));
   };
 
   return (
